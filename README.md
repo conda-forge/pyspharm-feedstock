@@ -5,7 +5,7 @@ Home: https://code.google.com/p/pyspharm/
 
 Package license: MIT and https://www2.cisl.ucar.edu/resources/legacy/spherepack/license
 
-Feedstock license: BSD
+Feedstock license: BSD 3-Clause
 
 Summary: Provides an object-oriented python interface to the NCAR SPHEREPACK library
 
@@ -69,6 +69,7 @@ Terminology
 
 Current build status
 ====================
+
 Linux: [![Circle CI](https://circleci.com/gh/conda-forge/pyspharm-feedstock.svg?style=svg)](https://circleci.com/gh/conda-forge/pyspharm-feedstock)
 OSX: [![TravisCI](https://travis-ci.org/conda-forge/pyspharm-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/pyspharm-feedstock) 
 Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/pyspharm-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/pyspharm-feedstock/branch/master)
