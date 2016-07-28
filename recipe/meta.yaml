@@ -11,7 +11,7 @@ source:
     md5: 6d942bdadd4cb26dfe9c3ee01fa149d1
 
 build:
-    number: 0
+    number: 1
     skip: True  # [win and py3k or win64]
 
 requirements:
@@ -19,20 +19,23 @@ requirements:
         - python
         - numpy x.x
         - mingwpy  # [win]
-        - gcc  # [unix]
+        - gcc  # [not win]
     run:
         - python
         - numpy x.x
-        - libgcc  # [unix]
+        - libgcc  # [linux]
+        - libgfortran  # [osx]
 
 test:
     imports:
         - spharm
+    commands:
+        - conda inspect linkages -n _test pyspharm  # [not win]
 
 about:
     home: https://code.google.com/p/pyspharm/
     license: MIT and https://www2.cisl.ucar.edu/resources/legacy/spherepack/license
-    summary: Provides an object-oriented python interface to the NCAR SPHEREPACK library
+    summary: 'Provides an object-oriented python interface to the NCAR SPHEREPACK library.'
 
 extra:
     recipe-maintainers:
