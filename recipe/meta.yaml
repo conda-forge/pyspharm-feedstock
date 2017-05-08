@@ -8,7 +8,7 @@ package:
 source:
   fn: {{ commit }}.tar.gz
   url: https://github.com/jswhit/pyspharm/archive/{{ commit }}.tar.gz
-  md5: 6d942bdadd4cb26dfe9c3ee01fa149d1
+  sha256:
 
 build:
   number: 1
@@ -35,7 +35,8 @@ test:
 
 about:
   home: https://code.google.com/p/pyspharm/
-  license: MIT and https://www2.cisl.ucar.edu/resources/legacy/spherepack/license
+  license: spherepack
+  license_file: LICENSE.spherepack
   summary: 'Provides an object-oriented python interface to the NCAR SPHEREPACK library.'
 
 extra:
