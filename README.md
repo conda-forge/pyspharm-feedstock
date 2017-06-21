@@ -3,7 +3,7 @@ About pyspharm
 
 Home: https://code.google.com/p/pyspharm/
 
-Package license: MIT and https://www2.cisl.ucar.edu/resources/legacy/spherepack/license
+Package license: spherepack
 
 Feedstock license: BSD 3-Clause
 
