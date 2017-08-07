@@ -6,23 +6,22 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ commit }}.tar.gz
   url: https://github.com/jswhit/pyspharm/archive/{{ commit }}.tar.gz
-  sha256:
+  sha256: dec9f360aef8b45ca59b2401cba8e9a9bcde7d314a90d51bb76fbd27a4e9a16f
 
 build:
-  number: 1
+  number: 2
   skip: True  # [win and py3k or win64]
 
 requirements:
   build:
     - python
-    - numpy x.x
+    - numpy 1.8.*
     - mingwpy  # [win]
     - gcc  # [not win]
   run:
     - python
-    - numpy x.x
+    - numpy >=1.8
     - libgcc  # [linux]
     - libgfortran  # [osx]
 
