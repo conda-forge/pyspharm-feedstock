@@ -1,5 +1,5 @@
 {% set version = "1.0.9" %}
-{% set commit = "cb3b00fd5e23eb6763012582d2bc8858809267d7" %}
+{% set commit = "b913aac7a25495caaa253ab4570f50a398e5639c" %}
 
 package:
   name: pyspharm
@@ -7,21 +7,21 @@ package:
 
 source:
   url: https://github.com/jswhit/pyspharm/archive/{{ commit }}.tar.gz
-  sha256: dec9f360aef8b45ca59b2401cba8e9a9bcde7d314a90d51bb76fbd27a4e9a16f
+  sha256: 726e8884aa598c4e3ee959cd3ca64d4748818ff277b41d48523cd6d70882ceb9
 
 build:
-  number: 2
+  number: 3
   skip: True  # [win and py3k or win64]
 
 requirements:
   build:
     - python
-    - numpy 1.8.*
+    - numpy 1.11.*
     - mingwpy  # [win]
     - gcc  # [not win]
   run:
     - python
-    - numpy >=1.8
+    - numpy >=1.11
     - libgcc  # [linux]
     - libgfortran  # [osx]
 
@@ -33,7 +33,7 @@ test:
     - conda inspect objects -p $PREFIX pyspharm  # [osx]
 
 about:
-  home: https://code.google.com/p/pyspharm/
+  home: https://github.com/jswhit/pyspharm
   license: spherepack
   license_file: LICENSE.spherepack
   summary: 'Provides an object-oriented python interface to the NCAR SPHEREPACK library.'
