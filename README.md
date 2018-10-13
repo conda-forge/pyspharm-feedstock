@@ -7,7 +7,7 @@ Package license: spherepack
 
 Feedstock license: BSD 3-Clause
 
-Summary: Provides an object-oriented python interface to the NCAR SPHEREPACK library.
+Summary: Provides an object-oriented python interface to the NCAR SPHEREPACK library
 
 
 
