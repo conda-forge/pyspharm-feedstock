@@ -15,28 +15,26 @@ build:
 
 requirements:
   build:
+    - {{ compiler('fortran') }}        # [unix]
+    - {{ compiler('m2w64_fortran') }}  # [win]
+    - {{ compiler('c') }}        # [unix]
+    - {{ compiler('m2w64_c') }}  # [win]
+  host:
     - python
-    - numpy 1.11.*
-    - mingwpy  # [win]
-    - gcc  # [not win]
+    - numpy
   run:
     - python
-    - numpy >=1.11
-    - libgcc  # [linux]
-    - libgfortran  # [osx]
+    - {{ pin_compatible('numpy') }}
 
 test:
   imports:
     - spharm
-  commands:
-    - conda inspect linkages -p $PREFIX pyspharm  # [not win]
-    - conda inspect objects -p $PREFIX pyspharm  # [osx]
 
 about:
   home: https://github.com/jswhit/pyspharm
   license: spherepack
   license_file: LICENSE.spherepack
-  summary: 'Provides an object-oriented python interface to the NCAR SPHEREPACK library.'
+  summary: 'Provides an object-oriented python interface to the NCAR SPHEREPACK library'
 
 extra:
   recipe-maintainers:
