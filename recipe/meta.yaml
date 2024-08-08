@@ -15,10 +15,12 @@ build:
 
 requirements:
   build:
-    - {{ compiler('fortran') }}        # [unix]
+    - {{ compiler('fortran') }}  # [not win]
     - {{ compiler('m2w64_fortran') }}  # [win]
-    - {{ compiler('c') }}        # [unix]
+    - {{ compiler('c') }}  # [not win]
+    - {{ stdlib('c') }}  # [not win]
     - {{ compiler('m2w64_c') }}  # [win]
+    - {{ stdlib('m2w64_c') }}  # [win]
   host:
     - python
     - numpy
