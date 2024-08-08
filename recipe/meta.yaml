@@ -11,7 +11,7 @@ source:
 
 build:
   number: 1009
-  skip: True  # [win and py3k or win64 or py312]
+  skip: True  # [win and py3k or win64 or py>=312]
 
 requirements:
   build:
