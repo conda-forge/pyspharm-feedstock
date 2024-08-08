@@ -1,5 +1,5 @@
 {% set version = "1.0.9" %}
-{% set commit = "b913aac7a25495caaa253ab4570f50a398e5639c" %}
+{% set commit = "e1e9cfef0c9144bad0f480e07926f454bca85a8a" %}
 
 package:
   name: pyspharm
@@ -7,18 +7,20 @@ package:
 
 source:
   url: https://github.com/jswhit/pyspharm/archive/{{ commit }}.tar.gz
-  sha256: 726e8884aa598c4e3ee959cd3ca64d4748818ff277b41d48523cd6d70882ceb9
+  sha256: 06baee3b5ce9c6bd262da624dedf4769e9e67583ca655960d50abbc7969add81
 
 build:
-  number: 1008
-  skip: True  # [win and py3k or win64]
+  number: 1009
+  skip: True  # [win and py3k or win64 or py>=312]
 
 requirements:
   build:
-    - {{ compiler('fortran') }}        # [unix]
+    - {{ compiler('fortran') }}  # [not win]
     - {{ compiler('m2w64_fortran') }}  # [win]
-    - {{ compiler('c') }}        # [unix]
+    - {{ compiler('c') }}  # [not win]
+    - {{ stdlib('c') }}  # [not win]
     - {{ compiler('m2w64_c') }}  # [win]
+    - {{ stdlib('m2w64_c') }}  # [win]
   host:
     - python
     - numpy
