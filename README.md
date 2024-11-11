@@ -5,7 +5,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/pyspharm-feedst
 
 Home: https://github.com/jswhit/pyspharm
 
-Package license: spherepack
+Package license: LicenseRef-spherepack
 
 Summary: Provides an object-oriented python interface to the NCAR SPHEREPACK library
 
