@@ -33,8 +33,17 @@ requirements:
     - {{ pin_compatible('numpy') }}
 
 test:
+  requires:
+    - python
+    - numpy
+    - pytest
+    - hypothesis
   imports:
     - spharm
+  source_files:
+    - tests
+  commands:
+    - pytest tests
 
 about:
   home: https://github.com/jswhit/pyspharm
