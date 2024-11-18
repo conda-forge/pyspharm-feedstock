@@ -10,9 +10,10 @@ source:
   sha256: e579c8d72f09a3f9c6c797f67097f028793b3d37eb84dcca17f1a2655da76f3a
 
 build:
-  number: 1013
+  number: 1014
   skip: True  # [win]
   skip: True  # [py>=312]
+  script: "{{ PYTHON }} -m pip install --no-deps -vv ."
 
 requirements:
   build:
@@ -24,11 +25,12 @@ requirements:
     - {{ stdlib('m2w64_c') }}  # [win]
   host:
     - python
+    - pip
     - numpy
     - meson-python
-    - setuptools <74
   run:
     - python
+    - {{ pin_compatible('numpy') }}
 
 test:
   imports:
