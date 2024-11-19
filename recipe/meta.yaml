@@ -27,9 +27,9 @@ requirements:
     - numpy                                  # [build_platform != target_platform]
     - meson-python                           # [build_platform != target_platform]
     - ninja                                  # [build_platform != target_platform]
-    - {{ compiler('fortran') }}  # [not win]
-    - {{ compiler('c') }}  # [not win]
-    - {{ stdlib('c') }}  # [not win]
+    - {{ compiler('fortran') }}
+    - {{ compiler('c') }}
+    - {{ stdlib('c') }}
   host:
     - python
     - pip
