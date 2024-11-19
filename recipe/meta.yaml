@@ -11,7 +11,6 @@ source:
 
 build:
   number: 1014
-  skip: True  # [win]
   script:
     # Cross-compilation stuff vendored from numpy-feedstock
     # necessary for cross-compilation to point to the right env
@@ -29,11 +28,8 @@ requirements:
     - meson-python                           # [build_platform != target_platform]
     - ninja                                  # [build_platform != target_platform]
     - {{ compiler('fortran') }}  # [not win]
-    - {{ compiler('m2w64_fortran') }}  # [win]
     - {{ compiler('c') }}  # [not win]
     - {{ stdlib('c') }}  # [not win]
-    - {{ compiler('m2w64_c') }}  # [win]
-    - {{ stdlib('m2w64_c') }}  # [win]
   host:
     - python
     - pip
