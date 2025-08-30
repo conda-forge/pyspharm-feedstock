@@ -10,7 +10,7 @@ source:
   sha256: e579c8d72f09a3f9c6c797f67097f028793b3d37eb84dcca17f1a2655da76f3a
 
 build:
-  number: 1014
+  number: 1015
   skip: True  # [win]
   script:
     # Cross-compilation stuff vendored from numpy-feedstock
