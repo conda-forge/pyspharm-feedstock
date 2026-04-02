@@ -1,0 +1,91 @@
+schema_version: 1
+
+context:
+  version: "1.0.9"
+  commit: 317247960efa47d389cfbdae8ae659252f06731d
+
+package:
+  name: pyspharm
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jswhit/pyspharm/archive/${{ commit }}.tar.gz
+  sha256: e579c8d72f09a3f9c6c797f67097f028793b3d37eb84dcca17f1a2655da76f3a
+
+build:
+  number: 1016
+  skip: win
+  script:
+    # Cross-compilation stuff vendored from numpy-feedstock
+    # necessary for cross-compilation to point to the right env
+    - if: build_platform != target_platform
+      then: export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
+    - if: build_platform != target_platform
+      then: echo "python = '${PREFIX}/bin/python'" >> ${CONDA_PREFIX}/meson_cross_file.txt
+    - if: unix
+      then: MESON_ARGS_REDUCED="$(echo $MESON_ARGS | sed 's/--buildtype release //g')"
+    - if: unix
+      then: ${{ PYTHON }} -m pip install -vv --no-deps --ignore-installed . -Csetup-args=${MESON_ARGS_REDUCED// / -Csetup-args=}
+    - if: not unix
+      then: ${{ PYTHON }} -m pip install -vv --no-deps --ignore-installed .
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: python
+    - if: build_platform != target_platform
+      then: cross-python_${{ target_platform }}
+    - if: build_platform != target_platform
+      then: numpy
+    - if: build_platform != target_platform
+      then: meson-python
+    - if: build_platform != target_platform
+      then: ninja
+    - if: not win
+      then: ${{ compiler('fortran') }}
+    - if: win
+      then: ${{ compiler('m2w64_fortran') }}
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: not win
+      then: ${{ stdlib('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ stdlib('m2w64_c') }}
+  host:
+    - python
+    - pip
+    - numpy
+    - meson-python
+  run:
+    - python
+    - ${{ pin_compatible('numpy') }}
+
+tests:
+  - python:
+      imports:
+        - spharm
+      pip_check: false
+  - files:
+      source:
+        - tests
+    requirements:
+      run:
+        - python
+        - numpy
+        - pytest
+        - hypothesis
+    script:
+      - pytest tests
+
+about:
+  license: LicenseRef-spherepack
+  license_file: LICENSE.spherepack
+  summary: Provides an object-oriented python interface to the NCAR SPHEREPACK library
+  homepage: https://github.com/jswhit/pyspharm
+
+extra:
+  recipe-maintainers:
+    - ajdawson
+    - ocefpaf
