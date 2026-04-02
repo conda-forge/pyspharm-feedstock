@@ -19,40 +19,35 @@ build:
     # Cross-compilation stuff vendored from numpy-feedstock
     # necessary for cross-compilation to point to the right env
     - if: build_platform != target_platform
-      then: export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
-    - if: build_platform != target_platform
-      then: echo "python = '${PREFIX}/bin/python'" >> ${CONDA_PREFIX}/meson_cross_file.txt
+      then:
+        - export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
+        - echo "python = '${PREFIX}/bin/python'" >> ${CONDA_PREFIX}/meson_cross_file.txt
     - if: unix
-      then: MESON_ARGS_REDUCED="$(echo $MESON_ARGS | sed 's/--buildtype release //g')"
-    - if: unix
-      then: ${{ PYTHON }} -m pip install -vv --no-deps --ignore-installed . -Csetup-args=${MESON_ARGS_REDUCED// / -Csetup-args=}
-    - if: not unix
-      then: ${{ PYTHON }} -m pip install -vv --no-deps --ignore-installed .
+      then:
+        - MESON_ARGS_REDUCED="$(echo $MESON_ARGS | sed 's/--buildtype release //g')"
+        - ${{ PYTHON }} -m pip install -vv --no-deps --ignore-installed . -Csetup-args=${MESON_ARGS_REDUCED// / -Csetup-args=}
+      else:
+        - ${{ PYTHON }} -m pip install -vv --no-deps --ignore-installed .
 
 requirements:
   build:
     - if: build_platform != target_platform
-      then: python
-    - if: build_platform != target_platform
-      then: cross-python_${{ target_platform }}
-    - if: build_platform != target_platform
-      then: numpy
-    - if: build_platform != target_platform
-      then: meson-python
-    - if: build_platform != target_platform
-      then: ninja
-    - if: not win
-      then: ${{ compiler('fortran') }}
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+        - numpy
+        - meson-python
+        - ninja
     - if: win
       then: ${{ compiler('m2w64_fortran') }}
-    - if: not win
-      then: ${{ compiler('c') }}
-    - if: not win
-      then: ${{ stdlib('c') }}
+      else: ${{ compiler('fortran') }}
     - if: win
-      then: ${{ compiler('m2w64_c') }}
-    - if: win
-      then: ${{ stdlib('m2w64_c') }}
+      then:
+        - ${{ compiler('m2w64_c') }}
+        - ${{ stdlib('m2w64_c') }}
+      else:
+        - ${{ compiler('c') }}
+        - ${{ stdlib('c') }}
   host:
     - python
     - pip
@@ -66,7 +61,7 @@ tests:
   - python:
       imports:
         - spharm
-      pip_check: false
+      pip_check: true
   - files:
       source:
         - tests
