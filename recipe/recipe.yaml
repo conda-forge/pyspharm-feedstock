@@ -75,7 +75,12 @@ tests:
         - pytest
         - hypothesis
     script:
-      - pytest tests
+      # test_roundtrip_winds takes its absolute tolerance from
+      # max(u.max(), v.max()) rather than the largest magnitude, so the
+      # tolerance collapses to zero for non-positive input and the test fails
+      # on float32 round-off (seen on emulated aarch64); deselect it until
+      # that is fixed upstream
+      - pytest tests --deselect tests/test_hypothesis.py::TestSpharmt::test_roundtrip_winds
 
 about:
   license: LicenseRef-spherepack
