@@ -64,6 +64,10 @@ tests:
   - files:
       source:
         - tests
+      recipe:
+        # disables hypothesis' deadline, which makes the property-based tests
+        # flaky on slow CI machines
+        - conftest.py
     requirements:
       run:
         - python
